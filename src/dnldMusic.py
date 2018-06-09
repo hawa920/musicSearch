@@ -29,9 +29,13 @@ def audioDownload(url, sampleRate = 44100):
         'outtmpl': filename+'%(ext)s'
     }
     with youtube_dl.YoutubeDL(options) as ydl:
-        ydl.download( [url] )
+        try:
+            ydl.download( [url] )
+        except:
+            return False
 
     AudioSegment.from_file(filename).set_channels(1).set_frame_rate(sampleRate).export(filename, format=AUDIO_FORMAT, parameters = ['-y'])
+    return True
 
 
 if __name__ == "__main__":
@@ -43,5 +47,9 @@ if __name__ == "__main__":
         if line.startswith('@url:'):
             counter += 1
             line = line[5:].replace('\n', '')
-            audioDownload(line)
-            print('[{0}] Finished dowloading {1}'.format(counter, line[32:]))
+            ret = audioDownload(line)
+            if(ret):
+                print('[{0}] Finished dowloading {1}'.format(counter, line[32:]))
+            else:
+                print('[{0}] Failed to download {1}'.format(counter, line[32:]))
+
