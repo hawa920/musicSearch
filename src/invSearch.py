@@ -24,7 +24,7 @@ if __name__ == "__main__":
     # load features list
     with open(FEATLIST, 'r') as fp:
         features = json.load(fp)
-    
+
     invidx = {}
     # build inverted index
     for key, val in features.items():
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     # remove redundent
     for key, val in invidx.items():
         invidx[key] = list(set(invidx[key]))
-    
+
     # inverted index search
     classfy = []
     items = os.listdir(TEST_CLIP_DIR)
@@ -55,7 +55,7 @@ if __name__ == "__main__":
         # maximum matching
         resultlist = [[key, cnt] for key, cnt in Counter(classfy).items()]
         try:
-            result = max(resultlist, key = itemgetter(1))[0] # 0:key, 1:cnt
-            print('Classified result: {0} --> {1}'.format(item, result))
+            result = max(resultlist, key = itemgetter(1)) # 0:key, 1:cnt
+            print('Classified result: {0} --> {1}\tRate:{2}'.format(item, result, result[1] / len(thisFeats)))
         except:
             print('Music: {0} not found'.format(item))
