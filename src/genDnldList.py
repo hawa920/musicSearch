@@ -8,7 +8,7 @@ from operator import itemgetter
 SORT_FIELD = 'cview' # sort by ['cview', 'clike', 'chate', 'pubtime', 'nsubscribe']
 SRC_FILE = '../storage/mlist/crawledRecords'
 OUT_FILE = '../storage/mlist/downloadList'
-NUM_MUSIC = 1000 # number of music to be returned
+NUM_MUSIC = 5000 # number of music to be returned
 
 bulks = []
 with open(SRC_FILE, 'r') as fp:

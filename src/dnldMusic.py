@@ -2,10 +2,13 @@
 # 把裡面欲下載的歌曲透過 youtube-dl python api 下載回來
 # 在透過 ffmpeg 或者 pydub.AudioSegment 把音檔轉成單聲
 # 道, 取樣頻率 44.1kHz, 為的是減少儲存空間使用
+import os
+import re
 import youtube_dl
 from pydub import AudioSegment
 SAMPLING_RATE = 44100 # Nyquist Theorem
 SRC_FILE = '../storage/mlist/downloadList'
+MUSIC_PATH = '../storage/music'
 AUDIO_FORMAT = 'mp3' # Preferred audio format, less storage cost
 
 def audioDownload(url, sampleRate = 44100):
@@ -40,16 +43,24 @@ def audioDownload(url, sampleRate = 44100):
 
 if __name__ == "__main__":
     
+    mudict = {}
+    items = os.listdir(MUSIC_PATH)
+    for item in items:
+        item = re.sub('\.\w*', '', item)
+        mudict[item] = True
     with open(SRC_FILE, 'r') as fp:
         lines = fp.readlines()
     counter = 0
     for line in lines:
         if line.startswith('@url:'):
-            counter += 1
             line = line[5:].replace('\n', '')
+            if mudict.get(line[32:]) != None:
+                print('{0} already exists'.format(line[32:]))
+                continue
+            counter += 1
             ret = audioDownload(line)
+            mudict[line[32:]] = True
             if(ret):
                 print('[{0}] Finished dowloading {1}'.format(counter, line[32:]))
             else:
                 print('[{0}] Failed to download {1}'.format(counter, line[32:]))
-
