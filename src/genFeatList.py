@@ -20,8 +20,17 @@ MUSIC_POOL = '../storage/music/'
 items = os.listdir(MUSIC_POOL)
 features = {}
 cnt = 0
-
+existList = {}
+try:
+    with open(OUT_FILE, 'r') as fp:
+        existList = json.load(fp)
+except:
+    pass
+    
 for item in items:
+    if existList.get(re.sub('\.\w*', '', item)) != None:
+        continue
+    
     cnt += 1
     sound = AudioSegment.from_file(MUSIC_POOL + item).set_channels(1).set_frame_rate(SAMPLING_RATE)
     samples = sound.get_array_of_samples()
@@ -34,6 +43,6 @@ for item in items:
 
 
 
-with open(OUT_FILE, 'w') as fp:
+with open(OUT_FILE, 'a') as fp:
         fp.write(json.dumps(features))
 
