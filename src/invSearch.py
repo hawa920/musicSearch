@@ -18,6 +18,7 @@ from scipy.ndimage.morphology import generate_binary_structure, iterate_structur
 
 if __name__ == "__main__":
 
+    CORECTNESS_THRESHHOLD = 0.009
     SAMPLING_RATE = 44100
     FEATLIST = '../storage/flist/featuresList'
     TEST_CLIP_DIR = '../storage/clips/'
@@ -60,7 +61,7 @@ if __name__ == "__main__":
         try:
             result = max(resultlist, key = itemgetter(1)) # 0:key, 1:cnt
             correct_rate = result[1] / len(thisFeats)
-            if correct_rate >= 0.009:
+            if correct_rate >= CORECTNESS_THRESHHOLD:
                 print('{0}\t{1}\tRate:{2}'.format(item, 'https://www.youtube.com/watch?v=' + result[0], correct_rate))
             else:
                 raise Exception
