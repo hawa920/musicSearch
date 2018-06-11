@@ -20,30 +20,18 @@ if __name__ == "__main__":
 
     CORECTNESS_THRESHHOLD = 0.009
     SAMPLING_RATE = 44100
-    FEATLIST = '../storage/flist/featuresList'
+    FEATLIST = '../storage/flist/invFeaturesList'
     TEST_CLIP_DIR = '../storage/clips/'
 
     # load features list
-    with open(FEATLIST, 'r') as fp:
-        features = json.load(fp)
-
-    invidx = {}
-    # build inverted index
     start_time = time.time()
-    for key, val in features.items():
-        for fpt in val:
-            try:
-                invidx[fpt].append(key)
-            except:
-                invidx[fpt] = [key]
-    
-    # remove redundent
-    for key, val in invidx.items():
-        invidx[key] = list(set(invidx[key]))
+    with open(FEATLIST, 'r') as fp:
+        invidx = json.load(fp)
     print('Time to build inverted index {0}'.format(time.time() - start_time))
     # inverted index search
     classfy = []
     items = os.listdir(TEST_CLIP_DIR)
+    items = sorted(items)
     for item in items:
         classfy.clear()
         sound = AudioSegment.from_file(TEST_CLIP_DIR + item).set_channels(1).set_frame_rate(SAMPLING_RATE)

@@ -18,7 +18,7 @@ from scipy.ndimage.morphology import generate_binary_structure, iterate_structur
 if __name__ == "__main__":
 
     SAMPLING_RATE = 44100
-    FEATLIST = '../storage/flist/featuresList'
+    FEATLIST = '../storage/flist/seqFeaturesList'
     TEST_CLIP_DIR = '../storage/clips/'
 
     # load features list
@@ -26,6 +26,7 @@ if __name__ == "__main__":
         features = json.load(fp)
     
     items = os.listdir(TEST_CLIP_DIR)
+    items = sorted(items)
     result = {}
 
     for item in items:
@@ -49,4 +50,3 @@ if __name__ == "__main__":
         for iterate in sort_result:
             print(iterate)
         print('')
-
