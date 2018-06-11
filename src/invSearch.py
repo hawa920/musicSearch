@@ -28,11 +28,13 @@ if __name__ == "__main__":
     with open(FEATLIST, 'r') as fp:
         invidx = json.load(fp)
     print('Time to build inverted index {0}'.format(time.time() - start_time))
+    print('the length of the hash table {0}'.format(len(invidx)))
     # inverted index search
     classfy = []
     items = os.listdir(TEST_CLIP_DIR)
     items = sorted(items)
     for item in items:
+        start_time = time.time()
         classfy.clear()
         sound = AudioSegment.from_file(TEST_CLIP_DIR + item).set_channels(1).set_frame_rate(SAMPLING_RATE)
         samples = sound.get_array_of_samples()
@@ -50,7 +52,7 @@ if __name__ == "__main__":
             result = max(resultlist, key = itemgetter(1)) # 0:key, 1:cnt
             correct_rate = result[1] / len(thisFeats)
             if correct_rate >= CORECTNESS_THRESHHOLD:
-                print('{0}\t{1}\tRate:{2}'.format(item, 'https://www.youtube.com/watch?v=' + result[0], correct_rate))
+                print('{0}\t{1}\tRate:{2}\tTime:{3}'.format(item, 'https://www.youtube.com/watch?v=' + result[0], correct_rate, time.time() - start_time))
             else:
                 raise Exception
         except:

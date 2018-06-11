@@ -5,6 +5,7 @@
 import os
 import re
 import json
+import time
 import hashlib
 import featExtractor
 import numpy as np
@@ -22,9 +23,11 @@ if __name__ == "__main__":
     TEST_CLIP_DIR = '../storage/clips/'
 
     # load features list
+    start_time = time.time()
     with open(FEATLIST, 'r') as fp:
         features = json.load(fp)
-    
+    print('Time to generate sequential index {0}'.format(time.time() - start_time))
+    print('the length of the hash table {0}'.format(len(features)))
     items = os.listdir(TEST_CLIP_DIR)
     items = sorted(items)
     result = {}
