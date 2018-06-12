@@ -50,6 +50,7 @@ if __name__ == "__main__":
         resultlist = [[key, cnt] for key, cnt in Counter(classfy).items()]
         try:
             result = max(resultlist, key = itemgetter(1)) # 0:key, 1:cnt
+            # 下次可改成先算 rate 用rate的 max來判斷
             correct_rate = result[1] / len(thisFeats)
             if correct_rate >= CORECTNESS_THRESHHOLD:
                 print('{0}\t{1}\tRate:{2}\tTime:{3}'.format(item, 'https://www.youtube.com/watch?v=' + result[0], correct_rate, time.time() - start_time))

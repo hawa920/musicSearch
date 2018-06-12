@@ -26,11 +26,11 @@ try:
         existList = json.load(fp)
 except:
     pass
-    
+
 for item in items:
     if existList.get(re.sub('\.\w*', '', item)) != None:
         continue
-    
+
     cnt += 1
     sound = AudioSegment.from_file(MUSIC_POOL + item).set_channels(1).set_frame_rate(SAMPLING_RATE)
     samples = sound.get_array_of_samples()

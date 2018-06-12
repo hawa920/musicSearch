@@ -1,4 +1,4 @@
-# 這隻程式會去讀取 '../storage/mlist/downloadList' 
+# 這隻程式會去讀取 '../storage/mlist/downloadList'
 # 把裡面欲下載的歌曲透過 youtube-dl python api 下載回來
 # 在透過 ffmpeg 或者 pydub.AudioSegment 把音檔轉成單聲
 # 道, 取樣頻率 44.1kHz, 為的是減少儲存空間使用
@@ -15,8 +15,8 @@ def audioDownload(url, sampleRate = 44100):
     """ Download the audio(soundtrack) from
     given YouTube url with youtube-dl package.
     In order to save the storage size, the audio
-    file will be converted into mp3 format with 
-    only 1 channel left, sampling rate set to 
+    file will be converted into mp3 format with
+    only 1 channel left, sampling rate set to
     44.1 kHz as default.
     """
     token = url[32:]
@@ -42,7 +42,7 @@ def audioDownload(url, sampleRate = 44100):
 
 
 if __name__ == "__main__":
-    
+
     mudict = {}
     items = os.listdir(MUSIC_PATH)
     for item in items:

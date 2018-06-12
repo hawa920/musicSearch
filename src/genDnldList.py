@@ -1,4 +1,4 @@
-# 這隻程式是用來產生欲下載的音樂清單, 使用者應先透過一 youtubeCrawler 
+# 這隻程式是用來產生欲下載的音樂清單, 使用者應先透過一 youtubeCrawler
 # 先產生一資料檔(defaultPath:='../storage/mlist/crawledRecords'),
 # 透過這隻程式可以將crawledRecords的資料按所選取欄位排序, 並依據NUM_MUSIC
 # 去選出符合的前 K 筆將資料寫入 '../storage/mlist/downloadList' 之中。
@@ -8,7 +8,7 @@ from operator import itemgetter
 SORT_FIELD = 'cview' # sort by ['cview', 'clike', 'chate', 'pubtime', 'nsubscribe']
 SRC_FILE = '../storage/mlist/crawledRecords'
 OUT_FILE = '../storage/mlist/downloadList'
-NUM_MUSIC = 5000 # number of music to be returned
+NUM_MUSIC = 10000 # number of music to be returned
 
 bulks = []
 with open(SRC_FILE, 'r') as fp:
@@ -18,8 +18,8 @@ with open(SRC_FILE, 'r') as fp:
 # https://github.com/Howard19960920/youtubeCrawler/blob/master/src/myCrawl.py
 
 for line in lines:
-    
-    line = line.replace('\n', '') 
+
+    line = line.replace('\n', '')
     # extract media url
     if line.startswith('@url:'):
         url = line[5:]
@@ -70,7 +70,7 @@ for line in lines:
         temp = subscribe.replace('千', '000').replace('萬', '0000').replace('億', '00000000')
         temp = re.findall('\d', temp)
         subscribe = ''.join(temp)
-        try : 
+        try :
             subscribe = int(subscribe)
         except:
             subscribe = 0
@@ -84,7 +84,7 @@ for line in lines:
             "chate" : chate,
             "owner" : owner,
             "pubtime" : pubtime,
-            "subscribe" : subscribe 
+            "subscribe" : subscribe
         }
         bulks.append(bulk)
 
