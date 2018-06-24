@@ -108,7 +108,7 @@
 				//console.log ("The Mp3 data " + e.data.buf);
 
 				var mp3Blob = new Blob([new Uint8Array(e.data.buf)], {type: 'audio/mp3'});
-				//uploadAudio(mp3Blob);
+				uploadAudio(mp3Blob);
 
 				var url = 'data:audio/mp3;base64,'+encode64(e.data.buf);
 				var li = document.createElement('li');

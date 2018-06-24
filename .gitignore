@@ -1,3 +1,4 @@
 storage/music
 src/__pycache__
 storage/flist/*
+demo/route/__pycache__/
