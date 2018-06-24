@@ -4,3 +4,5 @@ This project is an implementation of music (audio) search algorithm in python3, 
 ### Inspired by 
 * [An Industrial-Strength Audio Search Algorithm ](http://www.ee.columbia.edu/~dpwe/papers/Wang03-shazam.pdf)  
 * [Dejavu](https://github.com/worldveil/dejavu)
+
+![](https://i.imgur.com/FHyQCAE.png)
