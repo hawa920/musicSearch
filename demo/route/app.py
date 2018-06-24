@@ -34,7 +34,7 @@ def musicSearch():
   mp3signals = base64.b64decode(mp3signals[pos:])
   with open('./test.mp3', 'wb') as fp:
     fp.write(mp3signals)
-  
+
   return '1'
   #return base64.b64decode(mp3signals)
 
