@@ -85,13 +85,13 @@ def musicSearch():
   correct_rate = result[1] / len(thisFeats)
   if correct_rate >= CORECTNESS_THRESHHOLD:
       ret = '<a href="{0}"><img src="https://img.youtube.com/vi/{1}/hqdefault.jpg"/></a><br>'.format('https://www.youtube.com/watch?v=' + result[0], result[0])
-      ret += 'Rate:{0}\tTime:{1}'.format(correct_rate, time.time() - start_time)
+      ret += 'Rate:{0}\tTime:{1}\tNumOfLookUps:{2}'.format(correct_rate, time.time() - start_time, len(thisFeats))
       print(ret)
       return ret
   """
       else:
           raise Exception
-  
+
   except:
       ret = 'Result:\tNot Found'
   """
